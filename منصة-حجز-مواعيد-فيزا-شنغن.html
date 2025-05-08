@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات تأشيرات شنغن</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#1e40af',secondary:'#3b82f6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .hero-section {
+            background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('https://readdy.ai/api/search-image?query=A%20beautiful%20panoramic%20view%20of%20European%20landmarks%20including%20the%20Eiffel%20Tower%2C%20Colosseum%2C%20and%20Brandenburg%20Gate%20under%20a%20clear%20blue%20sky.%20The%20image%20has%20a%20soft%20gradient%20from%20right%20to%20left%2C%20with%20the%20right%20side%20showing%20clear%20landmarks%20and%20the%20left%20side%20transitioning%20to%20a%20clean%2C%20light%20background%20that%20would%20work%20well%20with%20text%20overlay.%20The%20overall%20style%20is%20photorealistic%20with%20vibrant%20colors.&width=1200&height=600&seq=123456&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background-color: #1e40af;
+            border-color: #1e40af;
+        }
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            top: 2px;
+            left: 6px;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .switch-slider {
+            background-color: #1e40af;
+        }
+        input:checked + .switch-slider:before {
+            transform: translateX(20px);
+        }
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .select-selected {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .select-items {
+            position: absolute;
+            background-color: white;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-top: 4px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        .select-item {
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+        .select-item:hover {
+            background-color: #f1f5f9;
+        }
+        .select-hide {
+            display: none;
+        }
+        .select-show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-['Pacifico'] text-primary">logo</h1>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-1 space-x-reverse">
+                <a href="#" class="px-4 py-2 text-gray-800 font-medium hover:text-primary">الرئيسية</a>
+                <a href="#" class="px-4 py-2 text-gray-800 font-medium hover:text-primary">الخدمات</a>
+                <a href="#" class="px-4 py-2 text-gray-800 font-medium hover:text-primary">الدول المدعومة</a>
+                <a href="#" class="px-4 py-2 text-gray-800 font-medium hover:text-primary">الأسئلة الشائعة</a>
+                <a href="#" class="px-4 py-2 text-gray-800 font-medium hover:text-primary">اتصل بنا</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <div class="relative hidden md:block">
+                    <div class="w-8 h-8 flex items-center justify-center text-gray-500 absolute right-2 top-1/2 transform -translate-y-1/2">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <input type="text" placeholder="ابحث هنا..." class="pr-10 py-2 border border-gray-200 rounded-lg text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+                
+                <button class="bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">
+                    احجز الآن
+                </button>
+                
+                <button class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+                    <i class="ri-menu-line ri-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero-section min-h-[600px] flex items-center">
+        <div class="container mx-auto px-4 w-full">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">خدمات تأشيرات شنغن بطريقة سهلة وسريعة</h1>
+                <p class="text-xl text-white/90 mb-8">احجز موعدك، جهّز أوراقك، وادفع أونلاين بخطوات بسيطة للحصول على تأشيرة شنغن بدون عناء</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">
+                        احجز موعدك الآن
+                    </button>
+                    <button class="bg-white text-primary px-8 py-3 !rounded-button font-medium hover:bg-gray-100 transition whitespace-nowrap">
+                        تعرف على خدماتنا
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countries Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">الدول المدعومة</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">نقدم خدمات حجز المواعيد وتخليص معاملات تأشيرة شنغن للعديد من الدول الأوروبية</p>
+            </div>
+            
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-gray-100 p-1 !rounded-full">
+                    <button class="px-6 py-2 !rounded-full bg-primary text-white whitespace-nowrap">كل الدول</button>
+                    <button class="px-6 py-2 !rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">غرب أوروبا</button>
+                    <button class="px-6 py-2 !rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">شرق أوروبا</button>
+                    <button class="px-6 py-2 !rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">شمال أوروبا</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Germany%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=1&orientation=squarish" alt="ألمانيا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">ألمانيا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20France%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=2&orientation=squarish" alt="فرنسا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">فرنسا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Italy%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=3&orientation=squarish" alt="إيطاليا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">إيطاليا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Spain%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=4&orientation=squarish" alt="إسبانيا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">إسبانيا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Netherlands%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=5&orientation=squarish" alt="هولندا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">هولندا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Belgium%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=6&orientation=squarish" alt="بلجيكا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">بلجيكا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Sweden%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=7&orientation=squarish" alt="السويد" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">السويد</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Austria%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=8&orientation=squarish" alt="النمسا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">النمسا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Greece%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=9&orientation=squarish" alt="اليونان" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">اليونان</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Portugal%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=10&orientation=squarish" alt="البرتغال" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">البرتغال</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Switzerland%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=11&orientation=squarish" alt="سويسرا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">سويسرا</h3>
+                </div>
+                
+                <div class="bg-white shadow-sm rounded-lg p-6 text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 mx-auto mb-4 overflow-hidden rounded-full">
+                        <img src="https://readdy.ai/api/search-image?query=Flag%20of%20Finland%2C%20high%20quality%2C%20official%20flag%2C%20realistic&width=200&height=200&seq=12&orientation=squarish" alt="فنلندا" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-medium text-gray-900">فنلندا</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">خدماتنا</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">نقدم مجموعة متكاملة من الخدمات لتسهيل عملية الحصول على تأشيرة شنغن</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-calendar-check-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">حجز مواعيد القنصليات</h3>
+                    <p class="text-gray-600 mb-4">نقوم بحجز موعد لك في القنصلية المطلوبة بأسرع وقت ممكن دون الحاجة للانتظار الطويل</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-file-list-3-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">تعبئة نماذج التأشيرة</h3>
+                    <p class="text-gray-600 mb-4">نساعدك في تعبئة جميع النماذج المطلوبة للتأشيرة بشكل صحيح وبدون أخطاء تؤدي للرفض</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-translate-2-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">ترجمة الوثائق</h3>
+                    <p class="text-gray-600 mb-4">خدمة ترجمة معتمدة لجميع الوثائق المطلوبة للتأشيرة بأسعار تنافسية وبجودة عالية</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-shield-check-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">تأمين السفر</h3>
+                    <p class="text-gray-600 mb-4">إصدار وثائق تأمين السفر الإلكترونية المطلوبة للحصول على تأشيرة شنغن بشكل فوري</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-customer-service-2-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">استشارات عبر واتساب</h3>
+                    <p class="text-gray-600 mb-4">خدمة استشارية مباشرة عبر الواتساب للإجابة على جميع استفساراتك حول التأشيرة</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg mb-4">
+                        <i class="ri-camera-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">صور بيومترية</h3>
+                    <p class="text-gray-600 mb-4">مساعدتك في تجهيز الصور البيومترية المطابقة للمواصفات المطلوبة من القنصليات</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        المزيد
+                        <i class="ri-arrow-left-line mr-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">لماذا تختارنا؟</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">نحن نقدم تجربة سلسة وموثوقة للحصول على تأشيرة شنغن</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary rounded-full mx-auto mb-4">
+                        <i class="ri-timer-flash-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">سرعة الإنجاز</h3>
+                    <p class="text-gray-600">نضمن لك حجز موعد وإنهاء معاملتك بأسرع وقت ممكن</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary rounded-full mx-auto mb-4">
+                        <i class="ri-secure-payment-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">دفع آمن</h3>
+                    <p class="text-gray-600">طرق دفع متعددة وآمنة بالكامل لضمان حماية معلوماتك المالية</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary rounded-full mx-auto mb-4">
+                        <i class="ri-customer-service-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">دعم فني 24/7</h3>
+                    <p class="text-gray-600">فريق دعم متاح على مدار الساعة للإجابة على استفساراتك</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary rounded-full mx-auto mb-4">
+                        <i class="ri-file-check-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">نسبة نجاح عالية</h3>
+                    <p class="text-gray-600">نفتخر بنسبة نجاح تتجاوز 95% في الحصول على التأشيرات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Booking Form -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">احجز موعدك الآن</h2>
+                        <p class="text-gray-600 mb-8">املأ النموذج التالي وسنتواصل معك في أقرب وقت ممكن لتأكيد حجزك</p>
+                        
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="name">الاسم الكامل</label>
+                                    <input type="text" id="name" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="أدخل اسمك الكامل">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 mb-2" for="phone">رقم الهاتف</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="أدخل رقم هاتفك">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="country">الدولة المطلوبة</label>
+                                <div class="custom-select">
+                                    <div class="select-selected" id="countrySelect">
+                                        <span>اختر الدولة</span>
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </div>
+                                    <div class="select-items" id="countryItems">
+                                        <div class="select-item" data-value="germany">ألمانيا</div>
+                                        <div class="select-item" data-value="france">فرنسا</div>
+                                        <div class="select-item" data-value="italy">إيطاليا</div>
+                                        <div class="select-item" data-value="spain">إسبانيا</div>
+                                        <div class="select-item" data-value="netherlands">هولندا</div>
+                                        <div class="select-item" data-value="belgium">بلجيكا</div>
+                                        <div class="select-item" data-value="sweden">السويد</div>
+                                        <div class="select-item" data-value="austria">النمسا</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="visa-type">نوع التأشيرة</label>
+                                <div class="custom-select">
+                                    <div class="select-selected" id="visaTypeSelect">
+                                        <span>اختر نوع التأشيرة</span>
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </div>
+                                    <div class="select-items" id="visaTypeItems">
+                                        <div class="select-item" data-value="tourism">سياحية</div>
+                                        <div class="select-item" data-value="business">عمل</div>
+                                        <div class="select-item" data-value="study">دراسة</div>
+                                        <div class="select-item" data-value="medical">علاج</div>
+                                        <div class="select-item" data-value="family">زيارة عائلية</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="travel-date">تاريخ السفر المتوقع</label>
+                                <input type="date" id="travel-date" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox">
+                                    <span class="mr-2 text-gray-700">أوافق على الشروط والأحكام وسياسة الخصوصية</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">
+                                تقديم الطلب
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="md:w-1/2 bg-primary relative hidden md:block">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20Arabic%20business%20person%20preparing%20travel%20documents%20for%20Schengen%20visa%20application.%20The%20scene%20shows%20passport%2C%20application%20forms%2C%20and%20travel%20documents%20neatly%20arranged%20on%20a%20desk.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting%20and%20a%20modern%20office%20setting.&width=600&height=800&seq=13&orientation=portrait" alt="خدمات التأشيرة" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">آراء عملائنا</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">تعرف على تجارب عملائنا السابقين مع خدماتنا</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"تجربة رائعة مع فريق محترف جداً. تم حجز موعد لي في السفارة الألمانية خلال أسبوع فقط بدلاً من الانتظار لشهور. أنصح بشدة بالتعامل معهم."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20middle-aged%20Arab%20businessman%20with%20short%20dark%20hair%20and%20a%20neat%20beard%2C%20wearing%20a%20business%20suit%2C%20neutral%20expression%2C%20studio%20lighting%2C%20plain%20background&width=100&height=100&seq=14&orientation=squarish" alt="أحمد محمد" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">أحمد محمد</h4>
+                            <p class="text-gray-500 text-sm">القاهرة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"ساعدوني في تعبئة النماذج وترجمة الأوراق المطلوبة للتأشيرة الفرنسية. كانت الخدمة سريعة ودقيقة وحصلت على التأشيرة من أول مرة. شكراً لكم."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20Arab%20woman%20with%20hijab%2C%20wearing%20business%20attire%2C%20neutral%20expression%2C%20studio%20lighting%2C%20plain%20background&width=100&height=100&seq=15&orientation=squarish" alt="سارة أحمد" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">سارة أحمد</h4>
+                            <p class="text-gray-500 text-sm">الإسكندرية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"خدمة ممتازة وفريق محترف. استخدمت خدمة الاستشارات عبر الواتساب وكانت الردود سريعة وواضحة. ساعدوني في تجهيز كل الأوراق المطلوبة للتأشيرة الإيطالية."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20Arab%20man%20with%20short%20dark%20hair%2C%20wearing%20casual%20business%20attire%2C%20neutral%20expression%2C%20studio%20lighting%2C%20plain%20background&width=100&height=100&seq=16&orientation=squarish" alt="محمد عبدالله" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">محمد عبدالله</h4>
+                            <p class="text-gray-500 text-sm">المنصورة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">الأسئلة الشائعة</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-right" id="faq1">
+                        <i class="ri-arrow-down-s-line text-primary"></i>
+                        <h3 class="text-lg font-medium text-gray-900">كم من الوقت يستغرق حجز موعد في القنصلية؟</h3>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq1-answer">
+                        <p class="text-gray-600">يختلف الوقت حسب القنصلية والموسم، لكن بشكل عام نستطيع حجز موعد خلال 3-14 يوم عمل. بعض القنصليات قد تستغرق وقتاً أطول خاصة في مواسم الذروة. نحن نسعى دائماً لتأمين أقرب موعد ممكن لعملائنا.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-right" id="faq2">
+                        <i class="ri-arrow-down-s-line text-primary"></i>
+                        <h3 class="text-lg font-medium text-gray-900">ما هي المستندات المطلوبة للحصول على تأشيرة شنغن؟</h3>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq2-answer">
+                        <p class="text-gray-600">المستندات الأساسية تشمل: جواز سفر ساري المفعول لمدة 6 أشهر على الأقل بعد العودة، صور شخصية بيومترية، حجوزات الطيران والفندق، تأمين سفر، كشف حساب بنكي، خطاب من جهة العمل، وإثبات الإقامة. قد تطلب بعض القنصليات مستندات إضافية حسب نوع التأشيرة والحالة الشخصية.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-right" id="faq3">
+                        <i class="ri-arrow-down-s-line text-primary"></i>
+                        <h3 class="text-lg font-medium text-gray-900">هل يمكنني إلغاء الحجز واسترداد المبلغ؟</h3>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq3-answer">
+                        <p class="text-gray-600">نعم، يمكنك إلغاء الحجز قبل 48 ساعة من تأكيد الموعد واسترداد 70% من قيمة الخدمة. في حال الإلغاء بعد تأكيد الموعد وقبل 24 ساعة من الموعد، يمكن استرداد 50% فقط. لا يمكن استرداد المبلغ في حال الإلغاء قبل أقل من 24 ساعة من الموعد.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-right" id="faq4">
+                        <i class="ri-arrow-down-s-line text-primary"></i>
+                        <h3 class="text-lg font-medium text-gray-900">هل تضمنون الحصول على التأشيرة؟</h3>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq4-answer">
+                        <p class="text-gray-600">نحن نقدم خدمات حجز المواعيد وتجهيز الأوراق بشكل احترافي لزيادة فرص قبول طلبك، لكن قرار منح التأشيرة يعود للقنصلية نفسها. نسبة نجاح عملائنا في الحصول على التأشيرة تتجاوز 95% بفضل خبرتنا في تجهيز الملفات بالشكل الصحيح.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 bg-white rounded-lg shadow-sm overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-right" id="faq5">
+                        <i class="ri-arrow-down-s-line text-primary"></i>
+                        <h3 class="text-lg font-medium text-gray-900">كم تكلفة خدماتكم؟</h3>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq5-answer">
+                        <p class="text-gray-600">تختلف التكلفة حسب نوع الخدمة والدولة المطلوبة. تبدأ خدمة حجز المواعيد من 500 جنيه مصري، وخدمة تعبئة النماذج من 300 جنيه، وخدمة الترجمة من 200 جنيه للصفحة. يمكنك الاطلاع على قائمة الأسعار الكاملة في صفحة الخدمات أو التواصل معنا للحصول على عرض سعر مخصص.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary/5">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">جاهز لبدء رحلتك إلى أوروبا؟</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">دعنا نساعدك في الحصول على تأشيرة شنغن بسهولة وسرعة. احجز موعدك الآن واستمتع بخدماتنا المتميزة.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">
+                        احجز موعدك الآن
+                    </button>
+                    <button class="bg-white text-primary border border-primary px-8 py-3 !rounded-button font-medium hover:bg-gray-50 transition whitespace-nowrap">
+                        <i class="ri-whatsapp-line ml-2"></i>
+                        تواصل عبر واتساب
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-['Pacifico'] text-white mb-6">logo</h3>
+                    <p class="text-gray-400 mb-6">خدمات حجز مواعيد وتخليص معاملات فيزا شنغن بطريقة سهلة وسريعة</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-twitter-x-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-whatsapp-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">روابط سريعة</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الرئيسية</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">خدماتنا</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الدول المدعومة</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الأسئلة الشائعة</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">خدماتنا</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">حجز مواعيد القنصليات</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تعبئة نماذج التأشيرة</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">ترجمة الوثائق</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تأمين السفر</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">استشارات عبر واتساب</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">اتصل بنا</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 ml-3">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">القاهرة، مصر - شارع التحرير، وسط البلد</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary ml-3">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400">+20 123 456 7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary ml-3">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400">info@visaservices.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary ml-3">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="text-gray-400">السبت - الخميس: 9 صباحاً - 6 مساءً</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 خدمات تأشيرات شنغن. جميع الحقوق محفوظة.</p>
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <span class="text-gray-400 text-sm">وسائل الدفع المقبولة:</span>
+                        <div class="flex space-x-2 space-x-reverse">
+                            <i class="ri-visa-fill text-2xl text-gray-300"></i>
+                            <i class="ri-mastercard-fill text-2xl text-gray-300"></i>
+                            <i class="ri-paypal-fill text-2xl text-gray-300"></i>
+                            <i class="ri-bank-card-fill text-2xl text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="#" class="fixed bottom-6 left-6 bg-green-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg hover:bg-green-600 transition z-50">
+        <i class="ri-whatsapp-line ri-2x"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            const faqButtons = document.querySelectorAll('[id^="faq"]');
+            faqButtons.forEach(button => {
+                if (!button.id.includes('-answer')) {
+                    button.addEventListener('click', function() {
+                        const answerId = button.id + '-answer';
+                        const answer = document.getElementById(answerId);
+                        const icon = button.querySelector('i');
+                        
+                        if (answer.classList.contains('hidden')) {
+                            answer.classList.remove('hidden');
+                            icon.classList.remove('ri-arrow-down-s-line');
+                            icon.classList.add('ri-arrow-up-s-line');
+                        } else {
+                            answer.classList.add('hidden');
+                            icon.classList.remove('ri-arrow-up-s-line');
+                            icon.classList.add('ri-arrow-down-s-line');
+                        }
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Custom Select for Country
+            const countrySelect = document.getElementById('countrySelect');
+            const countryItems = document.getElementById('countryItems');
+            
+            if (countrySelect && countryItems) {
+                countrySelect.addEventListener('click', function() {
+                    countryItems.classList.toggle('select-show');
+                });
+                
+                const countryOptions = countryItems.querySelectorAll('.select-item');
+                countryOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        const text = this.textContent;
+                        countrySelect.querySelector('span').textContent = text;
+                        countryItems.classList.remove('select-show');
+                    });
+                });
+            }
+            
+            // Custom Select for Visa Type
+            const visaTypeSelect = document.getElementById('visaTypeSelect');
+            const visaTypeItems = document.getElementById('visaTypeItems');
+            
+            if (visaTypeSelect && visaTypeItems) {
+                visaTypeSelect.addEventListener('click', function() {
+                    visaTypeItems.classList.toggle('select-show');
+                });
+                
+                const visaTypeOptions = visaTypeItems.querySelectorAll('.select-item');
+                visaTypeOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        const text = this.textContent;
+                        visaTypeSelect.querySelector('span').textContent = text;
+                        visaTypeItems.classList.remove('select-show');
+                    });
+                });
+            }
+            
+            // Close select dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.custom-select')) {
+                    const allSelectItems = document.querySelectorAll('.select-items');
+                    allSelectItems.forEach(item => {
+                        item.classList.remove('select-show');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
